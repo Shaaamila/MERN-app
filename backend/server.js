@@ -3,7 +3,7 @@ const app = express();
 const bodyParser = require('body-parser');
 const cors = require('cors');
 const mongoose = require('mongoose');
-
+const todoRoutes = express.Router();
 const PORT = 3000;
 
 let Todo = require('./todo.model');
@@ -19,6 +19,8 @@ const connection = mongoose.connection;
 connection.once('open', function(){
 	console.log("MongoDB database connection established successfully");
 } )
+
+app.use('/todos', todoRoutes);
 
 app.listen(PORT, function(){
 	console.log('server is running on Port:' + PORT);
