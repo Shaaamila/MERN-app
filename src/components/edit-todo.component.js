@@ -9,3 +9,5 @@ export default class EditTodo extends Component{
 			)
 	}
 }
+
+//the class 'EditTodo' is the path set in app.js Route 
