@@ -30,6 +30,14 @@ todoRoutes.route('/').get(function(req, res){
 	});
 });
 
+//to retreat one specific todo:
+todoRoutes.route('/:id').get(function(req, res){
+	let id = req.params.id;
+	Todo.findById(id, function(err, todo){
+		res.json(todo);
+	});
+});
+
 app.use('/todos', todoRoutes);
 
 app.listen(PORT, function(){
