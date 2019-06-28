@@ -38,6 +38,18 @@ todoRoutes.route('/:id').get(function(req, res){
 	});
 });
 
+//endpoint to send http post request when adding todo to DB:
+todoRoutes.route('/add').post(function(req, res){
+	let todo = new Todo(req.body);
+	todo.save()
+		.then(todo => {
+			res.status(200).json({'todo': 'todo added successfully'});
+		})
+		.catch(err => {
+			res.status(400).send('adding new todo failed');
+		});
+})
+
 app.use('/todos', todoRoutes);
 
 app.listen(PORT, function(){
