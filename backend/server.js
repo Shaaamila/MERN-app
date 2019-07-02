@@ -12,13 +12,14 @@ let Todo = require('./todo.model');
 app.use(cors());
 app.use(bodyParser.json());
 
-mongoose.connect('mongodb://127.0.0.1:56815/todos', { useNewUrlParser: true });
+mongoose.connect('mongodb://127.0.0.1:27017/todos', { useNewUrlParser: true });
 //number from mongo window in terminal, todos is the db name
 const connection = mongoose.connection;
 
 connection.once('open', function(){
 	console.log("MongoDB database connection established successfully");
 } )
+
 
 todoRoutes.route('/').get(function(req, res){
 	Todo.find(function(err, todos){
@@ -30,8 +31,8 @@ todoRoutes.route('/').get(function(req, res){
 	});
 });
 
-//to retreat one specific todo:
-todoRoutes.route('/:id').get(function(req, res){
+// to retreat one specific todo:
+todoRoutes.route('/:id').get(function(req, res) {
 	let id = req.params.id;
 	Todo.findById(id, function(err, todo){
 		res.json(todo);
@@ -49,7 +50,6 @@ todoRoutes.route('/add').post(function(req, res){
 			res.status(400).send('adding new todo failed');
 		});
 });
-
 todoRoutes.route('/update/:id').post(function(req, res){
 	Todo.findById(req.params.id, function(err, todo){
 		if (!todo)
@@ -68,6 +68,7 @@ todoRoutes.route('/update/:id').post(function(req, res){
 			});
 	});
 });
+
 
 app.use('/todos', todoRoutes);
 

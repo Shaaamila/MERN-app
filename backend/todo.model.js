@@ -16,7 +16,7 @@ let Todo = new Schema({
 	}
 });
 
-module.export = mongoose.model('Todo', Todo);
+module.exports = mongoose.model('Todo', Todo);
 
 
 //data comes in json form, need to set in String form (?) 
