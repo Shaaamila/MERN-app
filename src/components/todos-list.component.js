@@ -5,9 +5,9 @@ import axios from 'axios';
 
 const Todo = props => (
 	<tr>
-		<td>{props.todo.todo_description}</td>
-		<td>{props.todo.todo_responsible}</td>
-		<td>{props.todo.todo_priority}</td>
+		<td className={props.todo.todo_completed ? 'completed' : ''}>{props.todo.todo_description}</td>
+		<td className={props.todo.todo_completed ? 'completed' : ''}>{props.todo.todo_responsible}</td>
+		<td className={props.todo.todo_completed ? 'completed' : ''}>{props.todo.todo_priority}</td>
 
 		<td>
 		<Link to={"/edit/"+props.todo._id}>Edit</Link>
@@ -24,13 +24,23 @@ export default class TodosList extends Component{
 
 	componentDidMount(){
 		axios.get('http://localhost:4000/todos/')
-		.then(response => {
-			this.setState({todos: response.data});
-		})
-		.catch(function (error){
-			console.log(error);
-		})
+			.then(response => {
+				this.setState({todos: response.data});
+			})
+			.catch(function (error){
+				console.log(error);
+			})
 	}
+	componentDidUpdate(){
+		axios.get('http://localhost:4000/todos/')
+			.then(response => {
+				this.setState({todos: response.data});
+			})
+			.catch(function (error){
+				console.log(error);
+			})
+	}
+//without compDidUpdate the edit doesn't get updated immediately, needs to post twice or refresh the page manually 
 	todoList() {
 		return this.state.todos.map(function (currentTodo, i) {
 			return <Todo todo={currentTodo} key={i} />;			
