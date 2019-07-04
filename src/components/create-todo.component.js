@@ -40,10 +40,12 @@ export default class CreateTodo extends Component{
 		e.preventDefault();
 
 		console.log('Form Submitted:');
-		console.log('Todo Description: ${this.state.todo_description}');
-		console.log('Todo Responsible: ${this.state.todo_responsible}');
-		console.log('Todo Priority: ${this.state.todo_priority}');
-		console.log('Todo Completed: ${this.state.todo_completed}');
+		console.log(`Todo Description: ${this.state.todo_description}`);
+		console.log(`Todo Responsible: ${this.state.todo_responsible}`);
+		console.log(`Todo Priority: ${this.state.todo_priority}`);
+		console.log(`Todo Completed: ${this.state.todo_completed}`);
+
+		// back ticks instead of quote-marks, to read the {}
 
 
 		const newTodo = {
@@ -53,8 +55,9 @@ export default class CreateTodo extends Component{
 			todo_completed: this.state.todo_completed
 		}
 
-		axios.post('http://localhost:/3000/todos/add', newTodo)
+		axios.post('http://localhost:4000/todos/add', newTodo)
 			.then(res => console.log(res.data));
+			// .then(res => console.log('lulu'));
 
 
 
