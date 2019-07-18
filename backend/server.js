@@ -6,19 +6,36 @@ const mongoose = require('mongoose');
 const todoRoutes = express.Router();
 const PORT = 4000;
 
+// (now)  (for mLab )
+const uristring =
+    process.env.MONGOLAB_URI ||
+    process.env.MONGOHQ_URL ||
+    'mongodb://127.0.0.1:27017/todos';  //now
+
 let Todo = require('./todo.model');
 
 
 app.use(cors());
 app.use(bodyParser.json());
 
-mongoose.connect('mongodb://127.0.0.1:27017/todos', { useNewUrlParser: true });
+//(now)
+// mongoose.connect('mongodb://127.0.0.1:27017/todos', { useNewUrlParser: true });   //now
 //number from mongo window in terminal, todos is the db name
-const connection = mongoose.connection;
+// const connection = mongoose.connection;     //(now)
 
-connection.once('open', function(){
-	console.log("MongoDB database connection established successfully");
-} )
+
+// (for mLab):
+mongoose.connect(uristring, function (err, res) {
+      if (err) {
+      console.log ('ERROR connecting to: ' + uristring + '. ' + err);
+      } else {
+      console.log ('Succeeded connected to: ' + uristring);
+      }
+    });
+//(now)
+// connection.once('open', function(){
+// 	console.log("MongoDB database connection established successfully");
+// } )    //now
 
 
 todoRoutes.route('/').get(function(req, res){
@@ -72,7 +89,7 @@ todoRoutes.route('/update/:id').post(function(req, res){
 
 app.use('/todos', todoRoutes);
 
-app.listen(process.env.PORT || 8000, function(){
+app.listen(process.env.PORT || 4000, function(){
   console.log("Express server listening on port %d in %s mode", this.address().port, app.settings.env);
 });
 
