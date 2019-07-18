@@ -10,7 +10,9 @@ const PORT = 4000;
 const uristring =
     process.env.MONGOLAB_URI ||
     process.env.MONGOHQ_URL ||
-    'mongodb://127.0.0.1:27017/todos';  //now
+    'mongodb://127.0.0.1:27017/heroku_0jxxb521';  //now
+
+  //^replaced todos with mLab db
 
 let Todo = require('./todo.model');
 
@@ -39,11 +41,11 @@ mongoose.connect(uristring, function (err, res) {
 
 
 todoRoutes.route('/').get(function(req, res){
-	Todo.find(function(err, todos){
+	Todo.find(function(err, heroku_0jxxb521){
 		if (err) {
 			console.log(err);
 		} else {
-			res.json(todos);
+			res.json(heroku_0jxxb521);
 		}
 	});
 });
@@ -87,7 +89,7 @@ todoRoutes.route('/update/:id').post(function(req, res){
 });
 
 
-app.use('/todos', todoRoutes);
+app.use('/heroku_0jxxb521', todoRoutes);
 
 app.listen(process.env.PORT || 4000, function(){
   console.log("Express server listening on port %d in %s mode", this.address().port, app.settings.env);
