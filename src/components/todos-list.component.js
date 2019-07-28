@@ -23,7 +23,7 @@ export default class TodosList extends Component{
 	}
 
 	componentDidMount(){
-		axios.get('http://localhost:4000/todos/')
+		axios.get('http://localhost:4000/heroku_0jxxb521/')
 			.then(response => {
 				this.setState({todos: response.data});
 			})
@@ -32,7 +32,7 @@ export default class TodosList extends Component{
 			})
 	}
 	componentDidUpdate(){
-		axios.get('http://localhost:4000/todos/')
+		axios.get('http://localhost:4000/heroku_0jxxb521/')
 			.then(response => {
 				this.setState({todos: response.data});
 			})

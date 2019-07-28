@@ -12,6 +12,8 @@ const uristring =
     process.env.MONGOHQ_URL ||
     'mongodb://127.0.0.1:27017/heroku_0jxxb521';  //now
 
+const url = {useNewUrlParser: true };	//to fix warning signs in terminal nodemon
+
   //^replaced todos with mLab db
 
 let Todo = require('./todo.model');
@@ -27,13 +29,13 @@ app.use(bodyParser.json());
 
 
 // (for mLab):
-mongoose.connect(uristring, function (err, res) {
+mongoose.connect(uristring, url, function (err, res) {
       if (err) {
       console.log ('ERROR connecting to: ' + uristring + '. ' + err);
       } else {
       console.log ('Succeeded connected to: ' + uristring);
       }
-    });
+    } );
 //(now)
 // connection.once('open', function(){
 // 	console.log("MongoDB database connection established successfully");
