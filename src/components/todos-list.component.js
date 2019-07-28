@@ -24,22 +24,22 @@ export default class TodosList extends Component{
 
 	componentDidMount(){
 		axios.get('http://localhost:4000/heroku_0jxxb521/') 
-			// .then(response => {
-			// 	this.setState({todos: response.data});
-			// })
-			// .catch(function (error){
-			// 	console.log(error);
-			// })
+			.then(response => {
+				this.setState({todos: response.data});
+			})
+			.catch(function (error){
+				console.log(error);
+			})
 	}
 	//these^ and these v codes are not needed,  mLab mongo takes care of it
 	componentDidUpdate(){
 		axios.get('http://localhost:4000/heroku_0jxxb521/')
-			// .then(response => {
-			// 	this.setState({todos: response.data});
-			// })
-			// .catch(function (error){
-			// 	console.log(error);
-			// })
+			.then(response => {
+				this.setState({todos: response.data});
+			})
+			.catch(function (error){
+				console.log(error);
+			})
 	}
 //without compDidUpdate the edit doesn't get updated immediately, needs to post twice or refresh the page manually 
 	todoList() {
